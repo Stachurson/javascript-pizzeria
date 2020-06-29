@@ -52,33 +52,54 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
+
   class Product {
     constructor(id, data) {
       const thisProduct = this;
       thisProduct.id = id;
       thisProduct.data = data;
       thisProduct.renderInMenu();
-
-      console.log('New product:', thisProduct);
-
+      thisProduct.initAccordion();
+      console.log('new Product', thisProduct);
     }
-
     renderInMenu() {
       const thisProduct = this;
-
-      /* [DONE] generate HTML based on template */
+      /* generate HTML based on template */
       const generatedHTML = templates.menuProduct(thisProduct.data);
-
-      /* [DONE] create element using utils.createElementFromHTML */
+      /* create element using utils.createElementFromHTML */
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-
-      /* [DONE] find menu container */
+      /* find menu container */
       const menuContainer = document.querySelector(select.containerOf.menu);
-
-      /* [DONE] add element to menu */
+      /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+    initAccordion() {
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const triggerClick = thisProduct.element.querySelector(select.menuProduct.clickable);
+      /* START: click event listener to trigger */
+      triggerClick.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        /* find all active products */
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
+        /* START LOOP: for each active product */
+        for (let activeProduct of activeProducts) {
+          /* START: if the active product isn't the element of thisProduct */
+          if (activeProduct != thisProduct.element) {
+            /* remove class active for the active product */
+            activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+            /* END: if the active product isn't the element of thisProduct */
+          }
+          /* END LOOP: for each active product */
+        }
+        /* END: click event listener to trigger */
+      });
+    }
   }
+
 
   const app = {
     initMenu: function () {
