@@ -116,7 +116,7 @@
 
       initOrderForm (){
         const thisProduct = this;
-        console.log('initOrderForm');
+        // console.log('initOrderForm');
 
         thisProduct.form.addEventListener('submit', function(event){
           event.preventDefault();
@@ -139,9 +139,9 @@
       processOrder() {
         const thisProduct = this;
         const formData = utils.serializeFormToObject(thisProduct.form);
-        console.log('formData', formData);
+        // console.log('formData', formData);
         let price = thisProduct.data.price;
-        console.log('processOrder');
+        // console.log('processOrder');
         /* START LOOP: for each PARAM */
         for (let paramId in thisProduct.data.params) {
           /*save the element in thisProduct.data.params with key paramId as const param */
@@ -181,7 +181,15 @@
       }
   }
 
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
 
+      // console.log('AmountWidget:', thisWidget);
+      // console.log('constructor arguments:', element);
+    }
+
+  }
 
 
   const app = {
