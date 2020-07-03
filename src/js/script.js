@@ -97,7 +97,8 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product', thisProduct);
+      
+      // console.log('new Product', thisProduct);
     }
     renderInMenu() {
       const thisProduct = this;
@@ -116,16 +117,16 @@
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
 
-      console.log('thisProduct.form', thisProduct.form);
+      // console.log('thisProduct.form', thisProduct.form);
 
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
 
-      console.log('thisProduct.formInputs', thisProduct.formInputs);
+      // console.log('thisProduct.formInputs', thisProduct.formInputs);
 
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-      
-      console.log('thisProduct.priceElem', thisProduct.priceElem);
+
+      // console.log('thisProduct.priceElem', thisProduct.priceElem);
 
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
@@ -157,7 +158,7 @@
     }
     initOrderForm() {
       const thisProduct = this;
-      console.log('initOrderForm');
+      // console.log('initOrderForm');
 
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -180,10 +181,13 @@
     processOrder() {
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+
+      // console.log('formData', formData);
       thisProduct.params = {};
+
       let price = thisProduct.data.price;
-      console.log('processOrder');
+
+      // console.log('processOrder');
       /* START LOOP: for each PARAM */
       for (let paramId in thisProduct.data.params) {
         /*save the element in thisProduct.data.params with key paramId as const param */
@@ -232,7 +236,7 @@
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = thisProduct.price;
-      console.log('thisProduct.params', thisProduct.params);
+      // console.log('thisProduct.params', thisProduct.params);
 
     }
     initAmountWidget() {
@@ -258,8 +262,8 @@
       thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.value);
       thisWidget.initActions();
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
+      // console.log('AmountWidget:', thisWidget);
+      // console.log('constructor arguments:', element);
     }
     getElements(element) {
       const thisWidget = this;
@@ -316,7 +320,7 @@
 
       thisCart.initActions();
 
-      console.log('new Cart', thisCart);
+      // console.log('new Cart', thisCart);
 
     }
     getElements(element) {
@@ -352,11 +356,11 @@
       /* add element to cart */
       cartContainer.appendChild(generatedDOM);
 
-      console.log('adding product', menuProduct);
+      // console.log('adding product', menuProduct);
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
-      console.log('thisCart.products', thisCart.products);
+      // console.log('thisCart.products', thisCart.products);
     }
   }
   class CartProduct {
@@ -373,8 +377,8 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
 
-      console.log('new CartProduct', thisCartProduct);
-      console.log('productData', menuProduct);
+      // console.log('new CartProduct', thisCartProduct);
+      // console.log('productData', menuProduct);
 
     }
     getElements(element) {
@@ -403,7 +407,7 @@
   const app = {
     initMenu: function () {
       const thisApp = this;
-      console.log('thisApp.data', thisApp.data);
+      // console.log('thisApp.data', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
