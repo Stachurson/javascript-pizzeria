@@ -1,3 +1,7 @@
+import {settings, select, templates, classNames} from '../settings.js';
+  import utils from '../utils.js';
+  import CartProduct from '../components/CartProduct.js';
+
 class Cart {
 
     constructor(element) {
@@ -118,8 +122,7 @@ class Cart {
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        address: 'test',
-        address: thisCart.dom.address,
+        address: thisCart.dom.address.value,
         phone: thisCart.dom.phone,
         totalNumber: thisCart.totalNumber,
         subtotalPrice: thisCart.subtotalPrice,
@@ -129,8 +132,7 @@ class Cart {
       };
 
       for (let cartProd of thisCart.products) {
-        cartProd.getData();
-        payload.products.push(cartProd);
+        payload.products.push(cartProd.getData());
       }
 
       const options = {
@@ -148,7 +150,7 @@ class Cart {
           console.log('parsedResponse', parsedResponse);
 
         });
-      
     }
-
 }
+
+export default Cart;
