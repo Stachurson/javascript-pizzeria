@@ -1,6 +1,6 @@
 /* global Handlebars, dataSource */
 
-const utils = {};
+export const utils = {};
 
 utils.createDOMFromHTML = function (htmlString) {
   let div = document.createElement('div');
