@@ -1,38 +1,46 @@
-import {templates, select} from '../settings.js';
-import {utils} from '../utils.js';
-import AmountWidget from './AmountWidget.js';
-  
-class Booking {
-    constructor(elBooking) {
-      const thisBooking = this;
-      thisBooking.render(elBooking);
-      thisBooking.initWidgets();
-      console.log('thisBooking', thisBooking);
-    }
-  
-    render(elBooking) {
-      const thisBooking = this;
-      /* generate HTML based on template */
-      const generatedHTML = templates.bookingWidget();
-      /* generate object */
-      thisBooking.dom = {};
-  
-      thisBooking.dom.wrapper = elBooking;
-  
-      /* create element generatedDOM */
-      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      /* add element to thisBooking.dom.wrapper */
-      thisBooking.dom.wrapper.appendChild(generatedDOM);
-      thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
-  
-      thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
-    }
-  
-    initWidgets() {
-      const thisBooking = this;
-  
-      thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-      thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
-    }
+import {
+  templates,
+  select
+} from '../settings.js';
+import {
+  AmountWidget
+} from './AmountWidget.js';
+import {
+  DatePicker
+} from './DatePicker.js';
+
+
+export class Booking {
+  constructor(bookingElement) {
+    const thisBooking = this;
+
+    thisBooking.render(bookingElement);
+    thisBooking.initWidgets();
+
   }
-export default Booking;
+
+  render(bookingElement) {
+    const thisBooking = this;
+
+    const generatedHTML = templates.bookingWidget();
+
+    thisBooking.dom = {};
+    thisBooking.dom.wrapper = bookingElement;
+
+    thisBooking.dom.wrapper.innerHTML = generatedHTML; // zawartość wrappera zamienia na kod wygenerowany z szblonu
+
+    thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
+
+    thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
+
+  }
+
+  initWidgets() {
+    const thisBooking = this;
+
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+    thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
+  }
+}
